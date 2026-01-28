@@ -1,105 +1,145 @@
-Domain Checker
+# Domain Checker
 
-A project for checking domain name availability via WHOIS.
-It includes two implementations:
-	•	 Console version - CLI application
-	•	Web version - Spring Boot MVC application
+A project to check domain name availability via WHOIS. This repository includes two implementations:
 
-⸻
+* 🖥 **Console Version** — Command-line Java application
+* 🌐 **Web Version** — Spring Boot MVC application
 
-🖥 Console Version
+---
 
-Description
+## Console Version
+
+### Description
 
 The console Java application:
-	•	Reads a list of domains from domains.txt
-	•	Checks each domain via WHOIS
-	•	Prints results to the console
-	•	Supports parallel domain checking and caching of WHOIS servers
 
-Structure
+* Reads a list of domains from a `domains.txt` file
+* Checks each domain using WHOIS
+* Outputs the results in the console
+* Supports parallel checking and caching of WHOIS servers
 
-console-domain-checker
+### Structure
+
+```
+console-domain-checker/
  ├── domains.txt
  └── DomainChecker.java
+```
 
-Usage
-	1.	Create domains.txt file:
+### Usage
 
+1. Create a `domains.txt` file with one domain per line:
+
+```
 google.com
 example.org
 someveryrandomname123456.net
+```
 
-	2.	Compile and run:
+2. Compile and run the application:
 
+```bash
 javac DomainChecker.java
 java DomainChecker
+```
 
-Example Output
+### Example Output
 
+```
 google.com : TAKEN
 example.org : FREE
 someveryrandomname123456.net : FREE
+```
 
-Features
-	•	WHOIS via TCP (port 43)
-	•	TLD to WHOIS server caching
-	•	Connection timeouts
-	•	Parallel domain checking
+### Features
 
-⸻
+* WHOIS queries via TCP (port 43)
+* Caching of TLD → WHOIS server mappings
+* Connection timeouts
+* Parallel domain checking
 
-Web Version (Spring MVC)
+---
 
-Description
+## Web Version (Spring MVC)
 
-Web application using Spring Boot + Thymeleaf:
-	•	Upload a .txt file with domains
-	•	Check their availability via WHOIS
-	•	Display results in a web page
+### Description
 
-Technologies
-	•	Java 21
-	•	Spring Boot 3.x
-	•	Spring MVC
-	•	Thymeleaf
-	•	Gradle
+The Spring Boot web application allows users to:
 
-Structure
+* Upload a `.txt` file containing domains
+* Check the availability of each domain via WHOIS
+* View results directly in the browser
 
-domain-checker
- ├── controller
- ├── service
- ├── whois
- └── resources
-     └── templates
+### Technologies
+
+* Java 21
+* Spring Boot 3.x
+* Spring MVC
+* Thymeleaf
+* Gradle
+
+### Structure
+
+```
+domain-checker/
+ ├── controller/
+ ├── service/
+ ├── whois/
+ └── resources/
+     └── templates/
          └── index.html
+```
 
-Usage
+### Usage
 
+```bash
 ./gradlew bootRun
+```
 
-Open in browser:
+Then open in your browser:
 
+```
 http://localhost:8080
+```
 
-Input File Format
+### Input File Format
 
-One domain per line:
+The `.txt` file should contain one domain per line:
 
+```
 google.com
 example.org
 someveryrandomname123456.net
+```
 
-Output
+### Output
 
-Results displayed in the browser:
+Results will be displayed in the browser:
 
+```
 google.com — TAKEN
 example.org — FREE
+```
 
-Features
-	•	MVC architecture
-	•	File upload (MultipartFile)
-	•	WHOIS server caching
-	•	Extensible service logic
+### Features
+
+* MVC architecture with Thymeleaf templates
+* File upload handling (MultipartFile)
+* WHOIS server caching for faster queries
+* Extensible service logic
+
+---
+
+## Possible Improvements
+
+* Asynchronous domain checking for faster results
+* Progress bar for file processing
+* REST API for programmatic access
+* Download results as `.txt`
+* Dockerized deployment
+
+---
+
+## License
+
+MIT License
